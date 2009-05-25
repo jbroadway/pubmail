@@ -21,15 +21,15 @@ required messagepub_api_key value.
 While you're logged into messagepub.com, edit your account settings. Here
 you should change two settings:
 
-a) Change your name: Enter your artist, band, label or company name here
+	a. Change your name: Enter your artist, band, label or company name here
 
-b) Replies setting: Enter your artist, band, label or company email address
+	b. Replies setting: Enter your artist, band, label or company email address
    here
 
 4. Edit your crontab and add the following line to it, which will run the
 message sending script:
 
-	*/2 * * * * cd /PATH/TO/SITE/pubmail; /usr/bin/php -f queue.php
+		*/2 * * * * cd /PATH/TO/SITE/pubmail; /usr/bin/php -f queue.php
 
 Make sure you change "/PATH/TO/SITE" to be the actual folder path to your
 website, and /usr/bin/php may need to be changed to the location of PHP
@@ -72,20 +72,20 @@ then you can do this in one of three ways:
 1. Include the sign-up form by adding this line of PHP code to any .php
 file:
 
-	<?php include_once ('pubmail/subscribe.php'); ?>
+		<?php include_once ('pubmail/subscribe.php'); ?>
 
 2. Include the subscribe.php form as an iframe in a static .html file:
 
-	<iframe src="/pubmail/subscribe.php" width="300" height="20"></iframe>
+		<iframe src="/pubmail/subscribe.php" width="300" height="20"></iframe>
 
 3. Build your own sign-up form that submits to the PubMail subscription
 handler:
 
-	<form method="POST" action="/pubmail/">
-	Subscribe to our mailing list:<br />
-	<input type="text" name="email" />
-	<input type="submit" value="Subscribe" />
-	</form>
+		<form method="POST" action="/pubmail/">
+		Subscribe to our mailing list:<br />
+		<input type="text" name="email" />
+		<input type="submit" value="Subscribe" />
+		</form>
 
 Feel free to customize the form all you like, but make sure to keep the
 form tag and the email field name as-is or it won't work.
