@@ -18,24 +18,23 @@ and set them to 0777 (read + write + execute for all).
 found there. You will need to register at messagepub.com to fill in the
 required messagepub_api_key value.
 
-While you're logged into messagepub.com, edit your account settings. Here
+	While you're logged into messagepub.com, edit your account settings. Here
 you should change two settings:
 
 	a. Change your name: Enter your artist, band, label or company name here
 
-	b. Replies setting: Enter your artist, band, label or company email address
-   here
+	b. Replies setting: Enter your artist, band, label or company email address here
 
 4. Edit your crontab and add the following line to it, which will run the
 message sending script:
 
 		*/2 * * * * cd /PATH/TO/SITE/pubmail; /usr/bin/php -f queue.php
 
-Make sure you change "/PATH/TO/SITE" to be the actual folder path to your
+	Make sure you change "/PATH/TO/SITE" to be the actual folder path to your
 website, and /usr/bin/php may need to be changed to the location of PHP
 on your server as well.
 
-If you can use SSH to log into your website, you can find out what the
+	If you can use SSH to log into your website, you can find out what the
 path to your site is by typing "pwd" and hitting enter. You can find out
 the path to PHP by typing "which php" and hitting enter.
 
