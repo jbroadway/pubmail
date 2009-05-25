@@ -11,6 +11,10 @@ td, th {
 	font-size: 12px;
 }
 
+tr.even {
+	background-color: #eee;
+}
+
 div#wrapper {
 	width: 720px;
 	margin-left: auto;
@@ -47,3 +51,18 @@ textarea.body {
 	font-family: monospace;
 	font-size: 12px;
 }
+
+#nav {
+	padding-top: 10px;
+}
+
+	#nav a {
+		padding-right: 8px;
+		font-size: 12px;
+	}
+	
+	#nav a.highlight {
+		font-weight: bold;
+		text-decoration: none;
+		color: #222;
+	}

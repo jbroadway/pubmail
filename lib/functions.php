@@ -113,10 +113,14 @@ class PubMail {
 			$emails = array ($emails);
 		}
 		foreach ($emails as $email) {
-			db_execute ('insert into subscribers values (%s, "active")', trim ($email));
+			$email = strtolower (trim ($email));
+			if (empty ($email)) {
+				continue;
+			}
+			db_execute ('insert into subscribers values (%s, "active")', $email);
 			if ($send_welcome) {
 				$this->add_to_queue (
-					trim ($email),
+					$email,
 					0,
 					'Thanks for subscribing!',
 					file_get_contents ('html/welcome_email.php')
