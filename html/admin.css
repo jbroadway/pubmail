@@ -1,0 +1,49 @@
+body {
+	background: #ddd;
+	color: #222;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+td, th {
+	color: #222;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+
+div#wrapper {
+	width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+}
+
+h1#title {
+	font-size: 17px;
+	text-transform: uppercase;
+	margin-bottom: 0px;
+	padding-left: 2px;
+}
+
+div#content {
+	width: 100%;
+	min-height: 200px;
+	border: 1px solid #aaa;
+	background: #f5f5f5;
+	padding: 10px 20px 15px 20px;
+	margin-bottom: 0px;
+}
+
+p#footer {
+	margin-top: 5px;
+	padding-left: 2px;
+}
+
+textarea.body {
+	background-image: url(message_body.png);
+	background-repeat: repeat-y;
+	background-attachment: scroll;
+	width: 700px;
+	font-family: monospace;
+	font-size: 12px;
+}
