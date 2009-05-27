@@ -187,12 +187,12 @@ class PubMail {
 		// 2. get subscribers and add them to the queue
 		$subscribers = $this->list_subscribers ();
 		foreach ($subscribers as $subscriber) {
-			$body = str_replace ('{email_address}', $subscriber->email, $body);
+			$_body = str_replace ('{email_address}', $subscriber->email, $body);
 			$this->add_to_queue (
 				$subscriber->email,
 				$message_id,
 				$subject,
-				$body
+				$_body
 			);
 		}
 	}

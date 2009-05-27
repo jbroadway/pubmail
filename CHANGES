@@ -1,3 +1,7 @@
+0.7
+
+- Fixed a bug causing the unsubscribe line to use the wrong email
+
 0.6
 
 - Added pager to messages, subscribers
