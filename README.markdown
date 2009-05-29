@@ -118,21 +118,13 @@ you've already got their permission to do so, usually from collecting them
 at shows or events, or from a previous mailing list that this is replacing.
 
 Another thing to note is that the reply-to address is going to receive
-bounced message notices from time to time as email addresses change. When
-a message comes back to you as bounced with a permanent failure error,
-make sure you log into the admin area and set that email address to bounced
-so it stops receiving messages. People can unsubscribe themselves from
-a link in the messages, but you have to handle bounces yourself.
-
-Remembering to do this helps free you from seeing that bounced message in
-the future, but also saves you sending an extra message unnecessarily
-("a penny saved is a penny earned...") and helps ensure email hosts don't
-start thinking your messages are spam. Repeatedly sending to bounced
-addresses is one way they use to try to detect spammers.
-
-Being careful here can help ensure your messages get through to happy
-subscribers, instead of being an annoyance to unwitting recipients.
-Happy sending!
+unsubscribe and bounced message notices from time to time as email addresses
+change. When a notice comes in, make sure you log into the admin area and
+set that email address to bounced or unsubscribed so it stops receiving
+messages. People can unsubscribe themselves from a link in the messages,
+but you currently have to handle their account status manually by logging
+in and changing it. Hopefully the handling of these can be automated in
+the future, but for now it has to be done manually.
 
 -----
 

@@ -80,16 +80,21 @@ class PubMail {
 	 */
 	function send_mail ($to, $subject, $body) {
 		// create the message
+		$recipients = array ();
+		$n = 1;
+		foreach ($to as $email) {
+			$recipients[] = array (
+				'position' => $n,
+				'channel' => 'email',
+				'address' => $email,
+			);
+			$n++;
+		}
 		$n = new Notification (array (
 			'body' => $body,
 			'subject' => $subject,
-			'recipients' => array (
-				'recipient' => array (
-					'position' => 1,
-					'channel' => 'email',
-					'address' => $to
-				)
-			)
+			'escalation' => '0',
+			'recipients' => array ('recipient' => $recipients)
 		));
 	
 		// send the message
@@ -122,8 +127,8 @@ class PubMail {
 				$this->add_to_queue (
 					$email,
 					0,
-					'Thanks for subscribing!',
-					file_get_contents ('html/welcome_email.php')
+					'', //Thanks for subscribing!',
+					'' //file_get_contents ('html/welcome_email.php')
 				);
 			}
 		}
@@ -187,12 +192,12 @@ class PubMail {
 		// 2. get subscribers and add them to the queue
 		$subscribers = $this->list_subscribers ();
 		foreach ($subscribers as $subscriber) {
-			$_body = str_replace ('{email_address}', $subscriber->email, $body);
+			//$_body = str_replace ('{email_address}', $subscriber->email, $body);
 			$this->add_to_queue (
 				$subscriber->email,
 				$message_id,
 				$subject,
-				$_body
+				$body
 			);
 		}
 	}
@@ -205,27 +210,68 @@ class PubMail {
 			'insert into queue (email, message_id, subject, body) values (%s, %s, %s, %s)',
 			$email,
 			$message_id,
-			$subject,
-			$body
+			'', //$subject,
+			'' //$body
 		);
 	}
 
 	/**
-	 * Send 50 messages from the queue (messagepub.com's rate limit).
+	 * Send messages from the queue. Takes any welcome messages first, then looks for
+	 * the next message_id in the queue and tries to send up to 50 messages for that
+	 * message at a time. This means a max of 2 messages (with multiple recipients)
+	 * per run, which adds up to 60 requests per hour with 3,000 recipients for
+	 * messages plus however many welcome messages on top of that.
 	 */
 	function run_queue () {
 		$res = db_fetch_array (
-			'select * from queue limit 50'
+			'select * from queue where message_id = 0'
 		);
 
-		while ($row = array_shift ($res)) {
-			if ($this->send_mail ($row->email, $row->subject, $row->body)) {
-				db_execute ('delete from queue where id = %s', $row->id);
-				if ($row->message_id > 0) {
-					db_execute ('update messages set recipients = recipients + 1 where id = %s', $row->message_id);
+		if (count ($res) > 0) {
+			$emails = array ();
+			foreach ($res as $row) {
+				$emails[] = $row->email;
+			}
+			if ($this->send_mail (
+				$emails,
+				'Thanks for subscribing!',
+				file_get_contents ('html/welcome_email.php')
+			)) {
+				foreach ($res as $row) {
+					db_execute ('delete from queue where id = %s', $row->id);
 				}
 			} else {
 				echo 'Error: ' . $this->error . "\n";
+			}
+		}
+
+		$message_id = db_shift ('select message_id from queue where message_id > 0 order by message_id asc limit 1');
+
+		if ($message_id) {
+			$res = db_fetch_array (
+				'select * from queue where message_id = %s limit 50',
+				$message_id
+			);
+
+			$message = db_single ('select * from messages where id = %s', $message_id);
+
+			if (count ($res) > 0) {
+				$emails = array ();
+				foreach ($res as $row) {
+					$emails[] = $row->email;
+				}
+				if ($this->send_mail (
+					$emails,
+					$message->subject,
+					$message->body
+				)) {
+					foreach ($res as $row) {
+						db_execute ('delete from queue where id = %s', $row->id);
+					}
+					db_execute ('update messages set recipients = recipients + %s where id = %s', count ($res), $message_id);
+				} else {
+					echo 'Error: ' . $this->error . "\n";
+				}
 			}
 		}
 	}

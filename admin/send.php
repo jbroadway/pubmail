@@ -15,11 +15,11 @@ if (! $pm->authenticate ()) {
 
 if (! empty ($_POST['subject']) && ! empty ($_POST['body'])) {
 	// add to queue
-	$_POST['body'] = str_replace (
+	/*$_POST['body'] = str_replace (
 		'{unsubscribe_link}',
 		'http://' . $_SERVER['HTTP_HOST'] . '/' . $pm->app_name () . '/unsubscribe.php?email={email_address}&key=' . $settings['unsubscribe_key'],
 		$_POST['body']
-	);
+	);*/
 	$count = $pm->send_message ($_POST['subject'], $_POST['body']);
 	require_once ('html/admin_sent.php');
 } else {
