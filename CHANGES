@@ -3,6 +3,7 @@
 - Removed our own unsubscribe link, we'll just rely on messagepub's link
 - Changed sending to be more compatible with messagepub's rate limiting
 - Fixed a warning in db_shift()
+- Added icon, favicon and improved colour scheme
 
 0.7
 
