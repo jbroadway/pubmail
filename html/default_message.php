@@ -13,10 +13,3 @@ Hope to see some familiar faces!
 
 Band X
 www.bandx.com
-
---
-
-To unsubscribe from our mailing list, you can use the
-following link:
-
-* {unsubscribe_link}
