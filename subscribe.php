@@ -6,6 +6,10 @@ require_once ('lib/functions.php');
 
 $pm = new PubMail ($settings);
 
+if (isset ($_GET['email'])) {
+	$_POST['email'] = $_GET['email'];
+}
+
 if (! empty ($_POST['email'])) {
 	$pm->add_subscribers ($_POST['email'], true);
 	require_once ('html/subscribe_added.php');

@@ -5,6 +5,7 @@
 - Fixed a warning in db_shift()
 - Added icon, favicon and improved colour scheme
 - Queue compatible with php-cli and php-cgi command line binaries now
+- Subscribe handler uses GET or POST
 
 0.7
 
