@@ -72,7 +72,9 @@ function db_shift ($sql) {
 	$res = @sqlite_query ($db, $sql);
 	if ($res) {
 		$arr = @sqlite_fetch_array ($res);
-		return array_shift ($arr);
+		if (is_array ($arr)) {
+			return array_shift ($arr);
+		}
 	}
 	return false;
 }
