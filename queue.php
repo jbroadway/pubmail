@@ -1,7 +1,7 @@
 <?php
 
 // BEGIN CLI KEEPOUT CHECKING
-if (php_sapi_name () !== 'cli') {
+if (isset ($_SERVER['REMOTE_ADDR'])) {
     // Add these lines to the very top of any file you don't want people to
     // be able to access directly.
     header ('HTTP/1.1 404 Not Found');
