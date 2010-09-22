@@ -13,6 +13,9 @@ admin_password = "default"
 ; You can change it for each message in the admin area.
 default_subject = "Monthly Newsletter"
 
+; This is the From address for sent emails.
+email_from = "You <you@example.com>"
+
 ; This is a private key that ensures your unsubscribe link
 ; isn't abused by rivals and bad guys. Set it to a random
 ; combination of letters and numbers, for example

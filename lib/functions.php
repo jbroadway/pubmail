@@ -90,7 +90,7 @@ class PubMail {
 			);
 			$n++;
 		}
-		$n = new Notification (array (
+		/*$n = new Notification (array (
 			'body' => $body,
 			'subject' => $subject,
 			'escalation' => '0',
@@ -102,6 +102,15 @@ class PubMail {
 		if ($n->error) {
 			$this->error = $n->error;
 			return false;
+		}*/
+		foreach ($recipients as $recipient) {
+			@mail (
+				$recipient['address'],
+				$subject,
+				$body,
+				'From: ' . $this->settings['email_from'] . "\r\n"
+			);
+			usleep (100000);
 		}
 		return true;
 	}
@@ -122,7 +131,10 @@ class PubMail {
 			if (empty ($email)) {
 				continue;
 			}
-			db_execute ('insert into subscribers values (%s, "active")', $email);
+			if (! db_execute ('insert into subscribers values (%s, "active")', $email)) {
+				$this->error = db_error ();
+				return false;
+			}
 			if ($send_welcome) {
 				$this->add_to_queue (
 					$email,
