@@ -15,15 +15,7 @@ Installation and first steps
 and set them to 0777 (read + write + execute for all).
 
 3. Now open the file settings.php for editing and change the settings
-found there. You will need to register at messagepub.com to fill in the
-required messagepub_api_key value.
-
-	While you're logged into messagepub.com, edit your account settings. Here
-you should change two settings:
-
-	a. Change your name: Enter your artist, band, label or company name here
-
-	b. Replies setting: Enter your artist, band, label or company email address here
+found there.
 
 4. Edit your crontab and add the following line to it, which will run the
 message sending script:
@@ -49,8 +41,8 @@ info to suit your site.
 
 8. To send a message, click "New Message" and enter a subject and body
 for the message, then click "Send". The message will be added to the
-queue and sent at a rate of 50 emails every 2 minutes, which complies
-with the sending limits of messagepub.com.
+queue and sent with a delay of 0.1 second between each email so as not
+to overwhelm your email server.
 
 That's all there is to it, you now have a working email newsletter for
 yourself, your band, label or company!

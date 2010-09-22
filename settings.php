@@ -1,6 +1,7 @@
 ; <?php /* LEAVE THIS LINE FOR SECURITY PURPOSES
 
-; Sign up for free at messagepub.com to get your API key
+; Sign up for free at messagepub.com to get your API key.
+; NOTE: Depricated, since messagepub.com is no longer.
 messagepub_api_key = ""
 
 ; Set this to the admin username for sending emails
